@@ -1,10 +1,9 @@
 mod platform;
 
 use std::{error::Error, future::pending, env};
-use udev::Device;
-use zbus::ConnectionBuilder;
+use zbus::{ConnectionBuilder, Connection};
 
-use crate::platform::Greeter;
+use crate::platform::{Greeter, CtrlPlatform};
 
 
 // Although we use `async-std` here, you can use any async runtime of choice.
@@ -22,21 +21,20 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    // Get the platform device created by our kernel driver.
-    let mut driver: Device;
-    let mut enumerator = udev::Enumerator::new().unwrap();
+    // TODO: Switch to system connection
+    let mut connection = Connection::session().await?;
 
-    enumerator.match_subsystem("platform").unwrap();
-
-    for device in enumerator.scan_devices().unwrap() {
-        println!("found device using kernel driver {:?}: {:?}", device.sysname(), device.syspath());
-        if device.sysname() == "gigabyte_laptop" {
-            driver = device.clone();
-            for attribute in device.attributes() {
-                println!("attribute {:?} = {:?}", attribute.name(), attribute.value());
-            }
+    // Setup interface for kernel driver
+    match CtrlPlatform::new() {
+        Ok(ctrl) => {
+            connection.object_server().at("/com/gigabyte/Platform", ctrl).await.ok();
+        }
+        Err(err) => {
+            println!("CtrlPlatform: {:?}", err);
         }
     }
+
+    connection.request_name("com.gigabyte.daemon").await?;
 
     // Start zbus server (TODO: Use system connection instead of session)
     let greeter = Greeter { count: 0 };
