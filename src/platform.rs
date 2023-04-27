@@ -1,30 +1,6 @@
 use std::path::PathBuf;
-use zbus::{dbus_interface, SignalContext, fdo};
-
-pub struct Greeter {
-    pub count: u64
-}
-
-#[dbus_interface(name = "org.zbus.MyGreeter1")]
-impl Greeter {
-    // Can be `async` as well.
-    fn say_hello(&mut self, name: &str) -> String {
-        self.count += 1;
-        format!("Hello {}! I have been called {} times.", name, self.count)
-    }
-
-    // Rude!
-    async fn go_away(
-        &self,
-        #[zbus(signal_context)]
-        ctxt: SignalContext<'_>,
-    ) -> fdo::Result<()> {
-        //Self::greeted_everyone(&ctxt).await?;
-        //self.done.notify(1);
-
-        Ok(())
-    }
-}
+use udev::Device;
+use zbus::dbus_interface;
 
 pub struct CtrlPlatform {
     pub device: PathBuf

@@ -1,9 +1,9 @@
 mod platform;
 
 use std::{error::Error, future::pending, env};
-use zbus::{ConnectionBuilder, Connection};
+use zbus::Connection;
 
-use crate::platform::{Greeter, CtrlPlatform};
+use crate::platform::CtrlPlatform;
 
 
 // Although we use `async-std` here, you can use any async runtime of choice.
@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     }
 
     // TODO: Switch to system connection
-    let mut connection = Connection::session().await?;
+    let connection = Connection::session().await?;
 
     // Setup interface for kernel driver
     match CtrlPlatform::new() {
@@ -35,14 +35,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
     }
 
     connection.request_name("com.gigabyte.daemon").await?;
-
-    // Start zbus server (TODO: Use system connection instead of session)
-    let greeter = Greeter { count: 0 };
-    let _conn = ConnectionBuilder::session()?
-        .name("org.zbus.MyGreeter")?
-        .serve_at("/org/zbus/MyGreeter", greeter)?
-        .build()
-        .await?;
 
     // Do other things or go to wait forever
     pending::<()>().await;
