@@ -1,0 +1,14 @@
+ENV{DMI_VENDOR}="$attr{[dmi/id]sys_vendor}"
+ENV{DMI_VENDOR}!="GIGABYTE", GOTO="gigabyted_end"
+
+ENV{DMI_FAMILY}="$attr{[dmi/id]product_family}"
+ENV{DMI_FAMILY}=="AERO", GOTO="gigabyted_start"
+ENV{DMI_FAMILY}=="AORUS", GOTO="gigabyted_start"
+# No match
+GOTO="gigabyted_end"
+
+LABEL="gigabyted_start"
+ACTION=="add|change", DRIVER=="gigabyte_laptop", TAG+="systemd", ENV{SYSTEMD_WANTS}="gigabyted.service"
+ACTION=="add|remove", DRIVER=="gigabyte_laptop", TAG+="systemd", RUN+="systemctl restart gigabyted.service"
+
+LABEL="gigabyted_end"
