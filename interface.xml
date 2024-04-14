@@ -1,0 +1,20 @@
+<node>
+    <interface name="org.gigabyte.daemon">
+        <method name="SwitchFanMode">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetFanSpeed">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetChargeMode">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetChargeLimit">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+    </interface>
+</node>

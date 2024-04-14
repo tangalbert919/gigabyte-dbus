@@ -29,11 +29,23 @@ impl CtrlPlatform {
 impl CtrlPlatform {
     // TODO: Implement
     fn switch_fan_mode(&self, value: i32) -> i32 {
-        2 * 3 * value
-    }
-    fn write_to_sysfs(&self, value: i32) -> i32 {
         let mut device = Device::from_syspath(&self.path).unwrap();
         device.set_attribute_value("fan_mode", &(value).to_string()).unwrap();
+        0
+    }
+    fn set_fan_speed(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("fan_custom_speed", &(value).to_string()).unwrap();
+        0
+    }
+    fn set_charge_mode(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("charge_mode", &(value).to_string()).unwrap();
+        0
+    }
+    fn set_charge_limit(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("charge_limit", &(value).to_string()).unwrap();
         0
     }
 }
