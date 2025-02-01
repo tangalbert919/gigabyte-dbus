@@ -48,4 +48,14 @@ impl CtrlPlatform {
         device.set_attribute_value("charge_limit", &(value).to_string()).unwrap();
         0
     }
+    fn set_fan_curve_index(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("fan_curve_index", &(value).to_string()).unwrap();
+        0
+    }
+    fn set_fan_curve_data(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("fan_curve_data", &(value).to_string()).unwrap();
+        0
+    }
 }
