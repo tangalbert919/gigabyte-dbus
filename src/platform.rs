@@ -11,7 +11,7 @@ impl CtrlPlatform {
         let mut enumerator = udev::Enumerator::new().unwrap();
 
         enumerator.match_subsystem("platform").unwrap();
-        enumerator.match_sysname("gigabyte_laptop").unwrap();
+        enumerator.match_sysname("aorus_laptop").unwrap();
         if let Some(device) = (enumerator.scan_devices().map_err(|err| {
             println!("Could not scan devices: {:?}", err)
         })?)
