@@ -21,7 +21,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    let connection = Connection::system().await?;
+    let connection = Connection::session().await?;
 
     // Setup interface for kernel driver
     match CtrlPlatform::new() {
