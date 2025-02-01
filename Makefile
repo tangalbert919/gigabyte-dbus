@@ -10,6 +10,8 @@ clean:
 	cargo clean
 
 install:
+	groupadd --system gigabyte-wmi
+	usermod -aG gigabyte-wmi "$$user"
 	install -Dm755 ./target/release/gigabyted /usr/bin/gigabyted
 	install -Dm644 gigabyted.rules /etc/udev/rules.d/gigabyted.rules
 	install -Dm644 gigabyted.service /usr/lib/systemd/system/gigabyted.service
@@ -20,6 +22,7 @@ uninstall:
 	rm -f /etc/udev/rules.d/gigabyted.rules
 	rm -f /usr/lib/systemd/system/gigabyted.service
 	rm -f /usr/share/dbus-1/system.d/gigabyted.conf
+	groupdel gigabyte-wmi
 
 build:
 	cargo build $(ARGS)
