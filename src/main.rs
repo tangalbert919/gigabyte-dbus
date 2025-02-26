@@ -31,7 +31,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         println!("gigabyted will run on com.gigabyte.debug to avoid interfering with the real com.gigabyte.daemon");
     }
 
-    let connection = Connection::session().await?;
+    let connection = Connection::system().await?;
 
     // Setup interface for kernel driver
     match CtrlPlatform::new() {
