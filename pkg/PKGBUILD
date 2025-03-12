@@ -1,0 +1,38 @@
+# Maintainer: Albert Tang <tangalbert919@yahoo.com>
+
+pkgbase=gigabyte-dbus
+pkgname=gigabyte-dbus
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A control daemon for interacting with Gigabyte laptops"
+arch=('x86_64')
+url="https://github.com/tangalbert919/gigabyte-dbus"
+license=('GPL2')
+makedepends=(
+  git
+  rust
+  systemd
+)
+_commit=f2cb5f9fd3e1f34491042c7d490a56e6dcef6a74
+source=("git+${url}.git#commit=$_commit")
+sha256sums=('SKIP')
+
+build() {
+  cd "${srcdir}/${pkgbase}"
+  cargo build --release
+  strip -s ./target/release/gigabyted
+}
+
+package() {
+  cd "${srcdir}/${pkgbase}"
+	install -Dm755 ./target/release/gigabyted "${pkgdir}"/usr/bin/gigabyted
+	install -Dm644 gigabyted.rules "${pkgdir}"/etc/udev/rules.d/gigabyted.rules
+	install -Dm644 gigabyted.service "${pkgdir}"/usr/lib/systemd/system/gigabyted.service
+	install -Dm644 gigabyted.conf "${pkgdir}"/usr/share/dbus-1/system.d/gigabyted.conf
+  install -Dm644 gigabyted.sysusers "${pkgdir}"/usr/lib/sysusers.d/$pkgname.conf
+}
+
+post_install() {
+  echo "To enable this, run the following command:"
+  echo "systemctl enable gigabyted.service"
+}
