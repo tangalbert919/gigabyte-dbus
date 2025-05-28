@@ -58,6 +58,11 @@ impl CtrlPlatform {
         device.set_attribute_value("fan_curve_data", &(value).to_string()).unwrap();
         0
     }
+    fn set_gpu_boost(&self, value: i32) -> i32 {
+        let mut device = Device::from_syspath(&self.path).unwrap();
+        device.set_attribute_value("gpu_boost", &(value).to_string()).unwrap();
+        0
+    }
     // get methods
     fn get_fan_mode(&self) -> i32 {
         let device = Device::from_syspath(&self.path).unwrap();
