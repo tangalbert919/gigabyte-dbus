@@ -1,10 +1,36 @@
 <node>
     <interface name="org.gigabyte.daemon">
-        <method name="SwitchFanMode">
-            <arg type="i" name="arg_0" direction="in" />
-            <arg type="i" name="arg_1" direction="out" />
+        <method name="GetBatteryCycle">
+            <arg type="i" name="arg_0" direction="out" />
         </method>
-        <method name="SetFanSpeed">
+        <method name="GetChargeLimit">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetChargeMode">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetFanCurveData">
+            <arg type="ii" name="arg_0" direction="out" />
+        </method>
+        <method name="GetFanCurveIndex">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetFanMode">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetFanSpeed">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetGpuBoost">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetUsbS3Toggle">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="GetUsbS4Toggle">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
+        <method name="SetChargeLimit">
             <arg type="i" name="arg_0" direction="in" />
             <arg type="i" name="arg_1" direction="out" />
         </method>
@@ -12,7 +38,23 @@
             <arg type="i" name="arg_0" direction="in" />
             <arg type="i" name="arg_1" direction="out" />
         </method>
-        <method name="SetChargeLimit">
+        <method name="SetFanCurveData">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetFanCurveIndex">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetFanSpeed">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SetGpuBoost">
+            <arg type="i" name="arg_0" direction="in" />
+            <arg type="i" name="arg_1" direction="out" />
+        </method>
+        <method name="SwitchFanMode">
             <arg type="i" name="arg_0" direction="in" />
             <arg type="i" name="arg_1" direction="out" />
         </method>
