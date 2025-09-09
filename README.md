@@ -1,6 +1,8 @@
 # gigabyte-dbus
 
-This program allows the [Aero Control Center](https://github.com/tangalbert919/AeroControlCenter) to interact with my [kernel driver](https://github.com/tangalbert919/gigabyte-laptop-wmi) without the need to run as root.
+This program allows third-party applications to interact with my [kernel driver](https://github.com/tangalbert919/gigabyte-laptop-wmi) without the need to run as root.
+
+An example of such application is [Aero Control Center](https://github.com/tangalbert919/AeroControlCenter).
 
 ## Installation
 
@@ -15,6 +17,9 @@ sudo make install
 ```sh
 sudo make uninstall
 ```
+
+## Documentation
+The methods can be found in `interface.xml`. Refer to the kernel driver's documentation on how to use the methods properly.
 
 ## TODO
 - [ ] Start moving functions from Aero Control Center to here
