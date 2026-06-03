@@ -24,6 +24,12 @@
         <method name="GetGpuBoost">
             <arg type="i" name="arg_0" direction="out" />
         </method>
+        <method name="GetLightSensor">
+            <arg type="iiii" name="arg_0" direction="out" />
+        </method>
+        <method name="GetPowerOnTime">
+            <arg type="iiiii" name="arg_0" direction="out" />
+        </method>
         <method name="GetUsbS3Toggle">
             <arg type="i" name="arg_0" direction="out" />
         </method>

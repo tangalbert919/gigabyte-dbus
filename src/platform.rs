@@ -117,4 +117,26 @@ impl CtrlPlatform {
         let gpu_boost = device.attribute_value("gpu_boost").unwrap();
         gpu_boost.to_str().unwrap().parse::<i32>().unwrap()
     }
+    fn get_power_on_time(&self) -> (i32, i32, i32, i32, i32) {
+        let device = Device::from_syspath(&self.path).unwrap();
+        let power_on_time = device.attribute_value("power_on_time").unwrap();
+        let mut parts = power_on_time.to_str().unwrap().split_whitespace();
+        let day = parts.next().unwrap().parse::<i32>().unwrap();
+        let hour = parts.next().unwrap().parse::<i32>().unwrap();
+        let minute = parts.next().unwrap().parse::<i32>().unwrap();
+        let month = parts.next().unwrap().parse::<i32>().unwrap();
+        let year = parts.next().unwrap().parse::<i32>().unwrap();
+        (day, hour, minute, month, year)
+    }
+    fn get_light_sensor(&self) -> (i32, i32, i32, i32) {
+        let device = Device::from_syspath(&self.path).unwrap();
+        let light_sensor = device.attribute_value("light_sensor").unwrap();
+        // TODO: Check for older models, as they don't use the same format
+        let mut parts = light_sensor.to_str().unwrap().split_whitespace();
+        let version = parts.next().unwrap().parse::<i32>().unwrap();
+        let lux_low = parts.next().unwrap().parse::<i32>().unwrap();
+        let lux_med = parts.next().unwrap().parse::<i32>().unwrap();
+        let lux_high = parts.next().unwrap().parse::<i32>().unwrap();
+        (version, lux_low, lux_med, lux_high)
+    }
 }
