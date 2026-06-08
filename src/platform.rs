@@ -53,7 +53,8 @@ impl CtrlPlatform {
         device.set_attribute_value("fan_curve_index", &(value).to_string()).unwrap();
         0
     }
-    fn set_fan_curve_data(&self, value: i32) -> i32 {
+    fn set_fan_curve_data(&self, speed: i32, temp: i32) -> i32 {
+        let value = speed << 8 | temp;
         let mut device = Device::from_syspath(&self.path).unwrap();
         device.set_attribute_value("fan_curve_data", &(value).to_string()).unwrap();
         0

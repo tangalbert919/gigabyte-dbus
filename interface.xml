@@ -46,7 +46,8 @@
         </method>
         <method name="SetFanCurveData">
             <arg type="i" name="arg_0" direction="in" />
-            <arg type="i" name="arg_1" direction="out" />
+            <arg type="i" name="arg_1" direction="in" />
+            <arg type="i" name="arg_2" direction="out" />
         </method>
         <method name="SetFanCurveIndex">
             <arg type="i" name="arg_0" direction="in" />
