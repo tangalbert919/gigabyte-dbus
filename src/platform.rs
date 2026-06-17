@@ -28,7 +28,7 @@ impl CtrlPlatform {
 #[dbus_interface(name = "com.gigabyte.Platform")]
 impl CtrlPlatform {
     // TODO: Implement
-    fn switch_fan_mode(&self, value: i32) -> i32 {
+    fn set_fan_mode(&self, value: i32) -> i32 {
         let mut device = Device::from_syspath(&self.path).unwrap();
         device.set_attribute_value("fan_mode", &(value).to_string()).unwrap();
         0

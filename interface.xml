@@ -61,7 +61,7 @@
             <arg type="i" name="arg_0" direction="in" />
             <arg type="i" name="arg_1" direction="out" />
         </method>
-        <method name="SwitchFanMode">
+        <method name="SetFanMode">
             <arg type="i" name="arg_0" direction="in" />
             <arg type="i" name="arg_1" direction="out" />
         </method>
