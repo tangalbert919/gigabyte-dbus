@@ -18,6 +18,9 @@
         <method name="GetFanMode">
             <arg type="i" name="arg_0" direction="out" />
         </method>
+        <method name="GetFanPwm">
+            <arg type="i" name="arg_0" direction="out" />
+        </method>
         <method name="GetFanSpeed">
             <arg type="i" name="arg_0" direction="out" />
         </method>

@@ -140,4 +140,9 @@ impl CtrlPlatform {
         let lux_high = parts.next().unwrap().parse::<i32>().unwrap();
         (version, lux_low, lux_med, lux_high)
     }
+    fn get_fan_pwm(&self) -> i32 {
+        let device = Device::from_syspath(&self.path).unwrap();
+        let fan_pwm = device.attribute_value("fan_pwm").unwrap();
+        fan_pwm.to_str().unwrap().parse::<i32>().unwrap()
+    }
 }
